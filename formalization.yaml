@@ -1,0 +1,172 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Lower bounds for the Gallai–van der Waerden numbers GW(r; 5, 3) and GW(r; 6, 3)"
+  description: >-
+    A Lean 4 and Mathlib proof of lower bounds for the Gallai–van der Waerden numbers GW(r; k, l) of
+    Mao, Ozeki, Robertson and Wang (the least M such that for every n ≥ M every exact r-colouring of
+    {1, …, n} contains a rainbow k-term or a monochromatic l-term arithmetic progression). For every r
+    from 5 to 17, an explicit exact r-colouring of {1, …, n_r} with no rainbow 5-term and no
+    monochromatic 3-term progression, n_r = 85, 85, 80, 80, 78, 78, 78, 77, 73, 73, 59, 59, 52; hence
+    GW(r; 5, 3) ≥ n_r + 1 (for every threshold with the defining property, and for the number itself
+    given that a threshold exists), and the canonical number H(5, 3) is at least 86. For (k, l) = (6, 3),
+    explicit good exact colourings of {1, …, 86} with 6 colours and of {1, …, 87} with 7 and 8 colours,
+    so GW(6; 6, 3) ≥ 87 and GW(7; 6, 3), GW(8; 6, 3) ≥ 88. Lean's kernel checks every colouring by
+    decide +kernel (no native_decide) through Boolean tests proved sound in Lean.
+  authors:
+    - "Arhan Canli"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Arhan Canli"
+
+classification:
+  arxiv: ["math.CO"]
+  msc2020: ["05D10", "11B25"]
+
+sources:
+  - title: >-
+      First lower bounds for GW(r; 5, 3), r = 5, …, 17 (Quantavane, November 2026): the results page of
+      quantavane.com and the public data repository of the paper "Power-residue colourings and exact
+      Gallai–van der Waerden numbers"
+    authors:
+      - "Arhan Canli"
+    id: "https://github.com/arhancanli/quantavane-gw-data"
+    type: web post
+    location: >-
+      https://quantavane.com/results/ ("Rainbow runs of five": "the first lower bounds for every r from
+      5 to 17, from GW(5;5,3) ≥ 86 down to GW(17;5,3) ≥ 53"); the data repository
+      arhancanli/quantavane-gw-data, file gw/k5/witnesses_k5l3.txt, public since 15 November 2026; the
+      paper (A. Canli, November 2026, not yet published), Section 5.5, Appendix B and Lemma 2.3
+    relationship: formalizes
+    contributors:
+      - name: "Claude (Anthropic)"
+        role: >-
+          AI agents working under Arhan Canli's direction: found the colourings by SAT search, checked
+          them with separately written programs, and wrote the Lean formalization
+    note: >-
+      The bounds were presented by Quantavane before this repository existed, and this repository
+      formalizes them: Lean checks the thirteen colourings of gw/k5/witnesses_k5l3.txt and the three
+      colourings that the paper's Lemma 2.3 (end extension) builds from the colourings of {1, …, 85}.
+      Before the formalization the colourings were checked by two separately written programs
+      (check_k5.c and check_k4.py of the data repository). Lemma 2.3 itself is not formalized: the
+      extended colourings are checked directly.
+    author_endorsement: participated
+  - title: "Arithmetic progressions, quasi progressions, and Gallai-Ramsey colorings"
+    authors:
+      - "Yaping Mao"
+      - "Kenta Ozeki"
+      - "Aaron Robertson"
+      - "Zhao Wang"
+    id: "doi:10.1016/j.jcta.2022.105672"
+    type: paper
+    location: "J. Combin. Theory Ser. A 193 (2023), 105672; Definition 1.15 and Proposition 4.1"
+    relationship: background
+    note: >-
+      Introduces the Gallai–van der Waerden numbers GW(r; k, l); the definitions in Challenge.lean follow
+      Definition 1.15. By Proposition 4.1, GW(r; 5, 3) = w(r; 3) for r ≤ 4.
+    author_endorsement: not-contacted
+
+related_formalizations:
+  - id: "https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-12-000009"
+    relationship: other
+    note: >-
+      Quantavane's formalization of the m-th power residue theorems (arhancanli/quantavane-gw-residue-power),
+      whose definitions IsGoodExactColouring, GWProperty and GW are used here unchanged (namespace GwPower
+      renamed Gw53). Neither repository imports the other; the colourings here are not residue colourings.
+
+status:
+  scope: >-
+    Formalized: sixteen explicit good exact colourings (thirteen for (k, l) = (5, 3), r = 5, …, 17;
+    three for (k, l) = (6, 3), r = 6, 7, 8); the resulting bounds for every threshold with the defining
+    property of GW(r; 5, 3) and GW(r; 6, 3); the bounds for the numbers GW themselves given that a
+    threshold exists; and a colouring of {1, …, 85} by natural numbers with no rainbow 5-term and no
+    monochromatic 3-term progression (H(5, 3) ≥ 86, stated directly). Not formalized: the
+    Gallai–van der Waerden theorem (that a threshold exists), which lt_GW_row5 and lt_GW_row6 take as
+    a hypothesis; the paper's Lemma 2.3 (the extended colourings are checked directly); any upper bound;
+    the values GW(r; 5, 3) = w(r; 3) for r ≤ 4.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: agent
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        AI agents in Claude Code with shell access to a local Lean toolchain, Mathlib, CaDiCaL, C and
+        Python, working under Arhan Canli's direction: one agent found the colourings by SAT search
+        (12 November 2026); another wrote this formalization and ran its checks (15 November 2026).
+      cost:
+        wall_time: "part of a day for the searches; about two hours for the Lean proof"
+        spend_usd: "subscription-based usage, not tracked per project"
+        hardware: "a local Mac (Apple silicon)"
+      prompting_notes: >-
+        The agents were asked for new mathematics on Gallai–van der Waerden numbers, then for a Lean
+        proof of the lower bounds with only the standard axioms (no native_decide), packaged for Palomar
+        like Quantavane's earlier Gallai–van der Waerden repositories.
+  spend_usd: "subscription-based usage, not tracked per project"
+  notes: >-
+    The searches, the programs and every line of Lean in this repository were written by AI agents
+    (Claude, by Anthropic). Arhan Canli directed the work and is responsible for the result.
+
+fidelity:
+  divergences: >-
+    None known with respect to MORW Definition 1.15 and the paper's statements. Lean conventions to
+    note: colourings are functions on ℕ whose values outside {1, …, n} are ignored; GW uses sInf, which
+    is 0 for the empty set, so the GW forms assume that some threshold exists, while the threshold forms
+    do not; the lengths n_r are the definition len5 (a list); H(5, 3) is not defined, and
+    exists_canonical_row5 states its lower bound as the existence of a colouring by natural numbers.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Quantavane's agents (Claude, Anthropic)"
+  notes: >-
+    The colourings were checked by two separately written programs before the Lean work, and the
+    generator checks them again by brute force. In Lean: the axioms of the compared theorems were
+    printed; the declarations the compared statements depend on were compared between the Challenge
+    and Solution environments; the exported Solution was replayed through the kernels bundled with the
+    toolchain; red controls (one point recoloured, the 5-colouring on {1, …, 86}, the 5-colouring
+    tested for rainbow 4-term progressions, the extended 6-colouring tested for rainbow 5-term
+    progressions, a missing seventeenth colour) are rejected by the kernel. No mathematician outside
+    Quantavane has reviewed the proof.
+
+alignment:
+  namespace: "Gw53"
+  statements:
+    - source: "Section 5.5: good exact r-colourings of [1, n_r] for (5, 3), r = 5, …, 17"
+      lean: "Gw53.exists_good_row5"
+      module: "Challenge"
+      status: proved
+    - source: "Section 5.5: GW(r; 5, 3) ≥ n_r + 1, threshold form"
+      lean: "Gw53.lt_of_gwProperty_row5"
+      module: "Challenge"
+      status: proved
+    - source: "Section 5.5: GW(r; 5, 3) ≥ n_r + 1"
+      lean: "Gw53.lt_GW_row5"
+      module: "Challenge"
+      status: proved
+      note: "Assumes that some threshold exists (the Gallai–van der Waerden theorem, not formalized)."
+    - source: "Section 1, after Corollary 1.2: H(5, 3) ≥ 86"
+      lean: "Gw53.exists_canonical_row5"
+      module: "Challenge"
+      status: proved
+    - source: "Section 5.5 (by Lemma 2.3): good exact colourings for (6, 3), r = 6, 7, 8"
+      lean: "Gw53.exists_good_row6"
+      module: "Challenge"
+      status: proved
+    - source: "Section 5.5: GW(6; 6, 3) ≥ 87, GW(7; 6, 3) ≥ 88, GW(8; 6, 3) ≥ 88, threshold form"
+      lean: "Gw53.lt_of_gwProperty_row6"
+      module: "Challenge"
+      status: proved
+    - source: "Section 5.5: GW(6; 6, 3) ≥ 87, GW(7; 6, 3) ≥ 88, GW(8; 6, 3) ≥ 88"
+      lean: "Gw53.lt_GW_row6"
+      module: "Challenge"
+      status: proved
+      note: "Assumes that thresholds exist (the Gallai–van der Waerden theorem, not formalized)."
+
+acknowledgements: >-
+  Mathlib and the Lean toolchain (Lean FRO), including the Comparator and the bundled kernel checkers;
+  Palomar's template and documentation.

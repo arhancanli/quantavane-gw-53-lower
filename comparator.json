@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Gw53.exists_good_row5",
+    "Gw53.lt_of_gwProperty_row5",
+    "Gw53.lt_GW_row5",
+    "Gw53.exists_canonical_row5",
+    "Gw53.exists_good_row6",
+    "Gw53.lt_of_gwProperty_row6",
+    "Gw53.lt_GW_row6"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
