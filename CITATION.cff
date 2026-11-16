@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "Lower bounds for the Gallai-van der Waerden numbers GW(r;5,3) and GW(r;6,3): Lean 4 proof"
+abstract: "Lean 4 proof of lower bounds for GW(r;5,3), r = 5..17, and GW(r;6,3)."
+authors:
+  - family-names: Canli
+    given-names: Arhan
+    affiliation: Quantavane
+    email: arhan@quantavane.com
+license: Apache-2.0
+url: "https://quantavane.com"
+repository-code: "https://github.com/arhancanli/quantavane-gw-53-lower"
+keywords:
+  - Gallai-van der Waerden numbers
+  - Lean 4
