@@ -157,6 +157,22 @@ python3 scripts/make_colourings.py witnesses_k5l3.txt Gw53/Colourings.lean   # r
 - `Gw53/Colourings.lean`: the sixteen colourings and their kernel checks (generated).
 - `comparator.json`, `formalization.yaml`, `scripts/CheckAxioms.lean`, `scripts/make_colourings.py`.
 
+## How to cite
+
+If you use this work, please cite it as below.
+
+```bibtex
+@misc{quantavane-gw-53-lower,
+  author       = {Canli, Arhan},
+  title        = {Lower bounds for the Gallai-van der Waerden numbers GW(r;5,3) and GW(r;6,3): Lean 4 proof},
+  year         = {2026},
+  howpublished = {\url{https://github.com/arhancanli/quantavane-gw-53-lower}},
+  note         = {Quantavane; Apache License 2.0}
+}
+```
+
+[CITATION.cff](CITATION.cff) gives the same reference for GitHub's "Cite this repository" button.
+
 ## Licence
 
 Apache-2.0 (`LICENSE`).
